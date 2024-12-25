@@ -11,13 +11,18 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
     align-content: center;
-    background: repeating-linear-gradient(-45deg, #ffae00, #ffae00 5px, #fce6ba 5px, #fce6ba 10px);
+    background: fff;
     flex-wrap: wrap;
 }
+
+.grid-col-1 {
+    display: flex;
+    justify-content: center;
+}
+
 .grid-col-1 > .grid-item {
-    width: 15%;
+    width: 16%;
 }
 
 .grid-col-2 > .grid-item {
@@ -31,14 +36,21 @@ body {
 .grid-item {
     list-style: none;
     padding: 10px 10px;
+    position: relative;
 }
 .grid-image {
     padding: 10px;
     width: 100%;
     border-radius: 15%;
 }
-
 .grid-col-2 .grid-image {
     width: 50%;
-    
+}
+.image-index {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: white;
 }
