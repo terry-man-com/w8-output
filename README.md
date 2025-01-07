@@ -1,5 +1,5 @@
 # w8-output
-HTML,CSS,DB,JavaScriptのアウトプット用リポジトリです。
+HTML,CSS,DB,JavaScriptのアウトプットでのメモをまとめたリポジトリです。（個人用）
 <details>
 <summary>gitのコミットの取り消しの取り消し方</summary>
 
@@ -122,4 +122,77 @@ HTML,CSS,DB,JavaScriptのアウトプット用リポジトリです。
 - `position: relative`はその要素を基準にして、子要素の`position: absolute`を適用するための設定であることを理解していなかった。
     - 整理１：親要素（基準）には`position: relative`、子要素（実際に動かしたい要素）には`position: absolute`
     - 整理２：spanタグとimgタグは同じ階層の要素であり、`position: relative`は親要素のdivタグ（新規作成）またはliタグに追加する必要があった。
+</details>
+
+<details>
+<summary>javascript splitメソッドの使い方</summary>
+
+### splitメソッドのまとめ
+---
+#### 概要
+- 文字列を区切り文字で分割する。
+- 配列内の一つの文字列を複数に分けて、それらを比較したり、値を計算したりする。ex. "11 1" → "11"と"1"に分解して（スペースで区切る）,値を計算して出た値で条件分岐をかけたりする。
+---
+#### コード例
+- 入力された値がゾロ目かを判定するコード
+```javascript
+let lines = ["11 1"];
+const md = lines[0].split(" "); //md = ["11", "1"]に分割した。
+if(lines[0] == "11 1" || md[1] / md[0] == 1 || md[1] / md[0] == 11) {
+    console.log("Yes");
+} else {
+    console.log("No");
+}
+```
+</details>
+
+<details>
+<summary>form入力した値をローカルストレージへ格納する</summary>
+
+### ローカルストレージへの保存と値の取得及びイベントにsubmitを指定した場合の処理
+---
+#### ローカルストレージへの保存
+```javascript
+const $form = document.getElementById("form");
+
+$form.addEventListener("submit", () => {
+  const inputEmail = email.value;
+  const inputPassword = password.value;
+
+  localStorage.setItem("email", inputEmail);
+  localStorage.setItem("password", inputPassword);
+})
+```
+- submitをイベントにしてjavascriptで動かしたいときは、form全体を変数に格納する。そうするとオブジェクトのように、取得したい要素のtypeを指定してあげることで、操作ができるようになる。
+- 最初は`email`,`password`,`button`をそれぞれ格納して、submitをイベント指定してローカルストレージへの保存を試みたため動作しなかった。
+---
+#### ローカルストレージに格納した値の取得
+- `localStorage.getItem(key)`// keyは`setItem(key, value)`で指定した任意のkey名
+#### コード
+```javascript
+addEventListener("load", () => {
+  isSavedEmail = localStorage.getItem("email");
+  isSavedPassword = localStorage.getItem("password");
+
+  $form.email.value = isSavedEmail;
+  $form.password.value = isSavedPassword;
+})
+```
+- `localStorage.getItem`でローカルストレージから値を取り出す。
+- `$form.email.value = isSavedEmail;`変数に格納しておいた値をフォームのtype属性emailのフォーム内（value）に値を入れておく。
+</details>
+
+<details>
+<summary>replaceメソッドの複数置き換え（Leet文字）</summary>
+
+### メソッドチェーンを用いて、複数条件で文字を置き換える。
+---
+#### コード
+```javascript
+const word = "MASAKI";
+const leet = word.replace(/A/g, '4').replace(/E/g, '3').replace(/G/g, '6').replace(/I/g, '1').replace(/O/g, '0').replace(/S/g, '5').replace(/Z/g, '2');
+console.log(leet); //出力結果　M454K1
+```
+- `/A/g` の g は「グローバル」の意味で、文字列全体の中で「A」をすべて探す。
+- `/` がつくと、その中に書かれた文字やルールを使って「検索する」という意味、/A/はAを探してねって意味になる。
 </details>
